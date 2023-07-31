@@ -1,0 +1,249 @@
+<div class="container-fluid">
+    <div class="mb-3">
+        <a class="btn text-white bg-gradient-primary" href="<?php echo base_url() ?>/PresupuestosController" style="border-radius: 10px;"><i class="fa fa-backward"></i> Regresar</a>
+    </div>
+    <div class="card shadow">
+        <form class="needs-validation" id="form_venta" novalidate>
+            <div class="card-body">
+                <h5> NUEVO PRESUPUESTO - PRODUCTOS </h5>
+                <hr>
+                <input type="hidden" class="sincon_igv" id="sincon_igv" name="sincon_igv">
+
+                <div class="row">
+                    <div class="mb-4 col-lg-6">
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="codigo_venta">Código: </label>
+                                <input id="codigo_venta" class="form-control" name="codigo_venta" disabled style="background:rgba(112, 128, 144, 0.5);" value="<?= $generar_codigo ?>">
+                                <div class="invalid-feedback">Este campo es requerido</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="tipo_cliente_id">Cliente: <span class="text-danger">*</span></label>
+                                <select id="tipo_cliente_id" class="form-control select2 selectperfilclientes" style="width:100%" data-placeholder="--seleccionar--" name="tipo_cliente_id" required>
+                                </select>
+                                <div class="invalid-feedback">Seleccione Cliente</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="fecha_venta">Fecha de Inicio <span class="text-danger">*</span></label>
+                                <input type="date" id="fecha_venta" class="form-control" name="fecha_venta" required>
+                                <div class="invalid-feedback">Este campo es requerido</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="fecha_caducidad_venta">Fecha de Caducidad: <span class="text-danger">*</span></label>
+                                <input type="date" id="fecha_caducidad_venta" class="form-control" name="fecha_caducidad_venta" required>
+                                <div class="invalid-feedback">Este campo es requerido</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <input type="hidden" id="tasa_imp" name="tasa_imp">
+                                <label for="impuesto_id">Impuesto: <span class="text-danger">*</span></label>
+                                <select id="impuesto_id" class="form-control select2 selectimpuestos" style="width:100%" data-placeholder="--seleccionar--" name="impuesto_id" required>
+                                </select>
+                                <div class="invalid-feedback">Seleccione Impuesto</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <input type="hidden" id="nombre_mon" name="nombre_mon">
+                                <label for="moneda_id">Moneda: <span class="text-danger">*</span></label>
+                                <select id="moneda_id" class="form-control select2 selectmonedas" style="width:100%" data-placeholder="--seleccionar--" name="moneda_id" required>
+                                </select>
+                                <div class="invalid-feedback">Seleccione Moneda</div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <input type="hidden" id="respaldo_valor_estado" name="respaldo_valor_estado">
+                                <label for="estado_venta">Estados: <span class="text-danger"></span></label>
+                                <select id="estado_venta" class="form-control select2" style="width:100%" data-placeholder="--seleccionar--" name="estado_venta" required>
+                                    <option value="borrador">Borrador</option>
+                                    <option value="enviado">Enviado</option>
+                                    <option value="expirado">Expirado</option>
+                                    <option value="rechazado">Rechazado</option>
+                                    <option value="aceptado">Aceptado</option>
+                                </select>
+                                <div class="invalid-feedback">Seleccione Estado</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="id_detalle_venta" name="id_detalle_venta">
+                    <div class="mb-4 col-lg-6">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="referencia_venta">Referencia: </label>
+                                <input id="referencia_venta" class="form-control" name="referencia_venta" maxlength="80" placeholder="">
+                                <div class="invalid-feedback">Este campo es requerido</div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="agente_venta">Agente: <span class="text-danger">*</span></label>
+                                <select id="agente_venta" class="form-control select2 selectempleados" style="width:100%" data-placeholder="--seleccionar--" name="agente_venta" required>
+                                </select>
+                                <div class="invalid-feedback">Seleccione Agente</div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="tipo_descuento_venta">Tipo de Descuento: <span class="text-danger"></span></label>
+                                <select id="tipo_descuento_venta" class="form-control select2" style="width:100%" data-placeholder="--seleccionar--" name="tipo_descuento_venta" required>
+                                    <option value="sin descuento" selected>Sin Descuento</option>
+                                    <option value="antes impuesto">Antes del Impuesto</option>
+                                    <option value="despues impuesto">Despues del Impuesto</option>
+                                </select>
+                                <div class="invalid-feedback">Seleccione Descuento</div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label for="nota_admin_venta">Nota del Admin: </label>
+                                <textarea id="nota_admin_venta" class="form-control" name="nota_admin_venta" maxlength="300" placeholder="" rows="3"></textarea>
+                                <div class="invalid-feedback">Este campo es requerido</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="form-group col-lg-3">
+                        <input type="hidden" id="nombre_mercancia_art" name="nombre_mercancia_art">
+                        <label for="articulo_id">Producto: <span class="text-danger">*</span></label>
+                        <select id="articulo_id" class="form-control select2 selectarticulos" style="width:100%" data-placeholder="--seleccionar--" name="articulo_id">
+                        </select>
+                        <div class="invalid-feedback">Selecione Producto</div>
+                    </div>
+
+                    <div class="form-group col-lg-3">
+                        <label for="stock_venta_det">Cantidad: <span class="text-danger">*</span></label>
+                        <div class="d-flex flex-column">
+                            <input type="number" step="1" id="stock_venta_det" class="form-control" name="stock_venta_det">
+                            <small class="ml-2 text-muted" id="max-stock-venta-det">Stock disponible:</small>
+                        </div>
+                        <div class="invalid-feedback">Este campo es requerido</div>
+                    </div>
+
+                    <div class="form-group col-lg-3">
+                        <label for="precio_venta_det">Precio de Venta: <span class="text-danger">*</span></label>
+                        <input type="number" id="precio_venta_det" class="form-control" name="precio_venta_det" step="0.01">
+                        <div class="invalid-feedback">Este campo es requerido</div>
+                    </div>
+
+                    <div class="form-group col-lg-3">
+                        <label for="mostrar_ocultar_igv">&nbsp;</label>
+                        <button type="button" class="btn form-control btn-outline-primary active" id="myButton" onclick=sin_con_igv()>Mostrar IGV</button>
+                    </div>
+
+                </div>
+
+                <div class="row" style="display: flex; justify-content: right;">
+                    <a class="btn btn-sm bg-gradient-primary text-white text-uppercase card__button" style="margin: auto;" onclick="AgregarVenta()">Agregar Producto</a>
+                </div>
+                <br>
+                <br>
+                <br>
+
+                <div class="card-body">
+                    <div class="table-responsive" id="titulos_tablas">
+
+
+                        <table class="table table-striped" style="width: 100%;" id="tabla_muestra">
+
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio de Venta</th>
+                                    <th>Importe </th>
+                                    <th>Opcion </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_ventas">
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-md-8 offset-md-4">
+                        <table class="table text-right">
+                            <tbody id="tbody_ejemplo">
+                                <tr>
+                                    <td><span class="font-weight-bold">Total neto (importe) :</span>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" id="importe_tot" class="importes_total" name="importe_tot">
+                                        <span class="text-danger" id="mon_simbolo1"></span>
+                                        <span class="text-danger" id="importes_total"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <span class="font-weight-bold">Descuento</span>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="input-group">
+                                                    <input id="descuento" style="width:60px" type="number" class="form-control " min="0" max="100" name="discount_percent" disabled>
+                                                    <div class="input-group-append">
+
+                                                        <select id="forma_descuento" class="form-control" style="color:darkgray;" disabled>
+                                                            <option value="0" selected disabled></option>
+                                                            <option value="1">%</option>
+                                                            <option value="2">Cantidad fija</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="text-danger" id="descuento_tipo"></span></td>
+                                    <input type="hidden" id="descuento_tipo_input" name="descuento_tipo">
+                                </tr>
+                                <tr id="myRow">
+                                    <td>IGV(<span class="text-danger" id="tasa"></span>%):</td>
+                                    <td><input type="hidden" id="total_impuesto" class="impuesto" name="total_impuesto">
+                                        <span class="text-danger" id="mon_simbolo2"></span>
+                                        <span class="text-danger" id="impuesto"></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><span class="font-weight-bold">Total :</span>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" id="total_venta" class="venta_total" name="total_venta">
+                                        <span class="text-danger" id="mon_simbolo3"></span>
+                                        <span class="text-danger" id="venta_total"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="card mt-2">
+        <div class="card-body">
+            <h6 class="mb-2">Nota Cliente</h6>
+            <textarea id="nota_cliente_venta" name="nota_cliente_venta" class="form-control mb-4" rows="5"></textarea>
+
+            <h6 class="mb-2">TERMINOS Y CONDICIONES</h6>
+            <textarea id="terminos_condiciones_venta" name="terminos_condiciones_venta" class="form-control" rows="5"><?= $term_y_cond[0]['descripcion_term_cond'] ?></textarea>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn bg-gradient-primary text-white float-right mb-2" id="button_add">Guardar</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+<script src="<?php echo base_url() ?>/recursos/js/ventas_general/presupuestos/productos/presupuesto.js"></script>
+<script src="<?php echo base_url() ?>/recursos/js/bootstrap_validation.js"></script>
+<link rel="stylesheet" href="<?php echo base_url() ?>/recursos/css/table_buttons.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>/recursos/css/estilo_button.css">
